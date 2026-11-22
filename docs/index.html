@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DaSync: ноутбук в кармане</title>
+<meta name="description" content="Управляй ноутбуком с телефона: тачпад, экран, файлы и мониторинг по домашней Wi-Fi. Без аккаунтов и облака.">
+<meta name="theme-color" content="#0b1020">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1020'/%3E%3Crect x='15' y='17' width='10' height='36' rx='5' fill='%236ee7ff'/%3E%3Cpath d='M31 13A16 16 0 0 1 31 45Z' fill='%23a78bfa' stroke='%23a78bfa' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0b1020;--card:#141a33;--line:#232b4d;--ink:#e8ecff;--dim:#9aa3c7;--cy:#6ee7ff;--vi:#a78bfa;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"Segoe UI",Roboto,system-ui,sans-serif;overflow-x:hidden}
+.amb{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.amb i{position:absolute;border-radius:50%;filter:blur(120px);opacity:.33}
+.amb i:nth-child(1){width:560px;height:560px;left:8%;top:-12%;background:#3b82f6;animation:d1 28s ease-in-out infinite alternate}
+.amb i:nth-child(2){width:500px;height:500px;right:-8%;top:18%;background:#8b5cf6;animation:d2 34s ease-in-out infinite alternate}
+.amb i:nth-child(3){width:520px;height:520px;left:36%;bottom:-30%;background:#06b6d4;opacity:.2;animation:d1 40s ease-in-out infinite alternate-reverse}
+@keyframes d1{to{transform:translate(160px,120px) scale(1.15)}}
+@keyframes d2{to{transform:translate(-180px,100px) scale(.9)}}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+nav{display:flex;align-items:center;gap:12px;padding:20px 0}
+nav b{font-size:19px;font-weight:800;letter-spacing:.3px}
+nav a.btn{margin-left:auto}
+.logo{width:36px;height:36px;display:block}
+.lb,.lw{animation:ls 3.8s ease-in-out infinite}.lb{--d:-3px}.lw{--d:3px}
+@keyframes ls{0%,20%,80%,100%{transform:translateY(0)}50%{transform:translateY(var(--d))}}
+.hero{text-align:center;padding:70px 0 40px}
+.hero .logo{width:92px;height:92px;margin:0 auto 26px;filter:drop-shadow(0 0 30px rgba(110,231,255,.35))}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.08;margin:0 0 18px;font-weight:800;letter-spacing:-.5px}
+h1 span{background:linear-gradient(90deg,var(--cy),var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:620px;margin:0 auto 34px;color:var(--dim);font-size:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;text-decoration:none;transition:transform .15s,box-shadow .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px);border-color:#3b4a86;box-shadow:0 12px 36px -12px rgba(110,231,255,.35)}
+.btn.primary{background:linear-gradient(135deg,var(--cy),#7aa7ff 55%,var(--vi));color:#071225;border:0}
+.btn.off{opacity:.55;pointer-events:none}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+h2{font-size:30px;margin:0 0 8px;text-align:center}
+.sub{color:var(--dim);text-align:center;margin:0 0 34px}
+section{padding:54px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.card{background:linear-gradient(180deg,rgba(32,41,68,.7),rgba(20,26,51,.7));border:1px solid var(--line);border-radius:20px;padding:24px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-3px);border-color:#34427a}
+.card h3{margin:0 0 6px;font-size:19px}
+.card p{margin:0 0 16px;color:var(--dim);font-size:15px}
+.card.hl{border-color:#4a63c9;box-shadow:0 0 0 1px rgba(110,231,255,.18),0 20px 60px -24px rgba(110,231,255,.35)}
+.num{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--cy),var(--vi));color:#071225;font-weight:800;display:grid;place-items:center;margin-bottom:12px}
+details{background:rgba(20,26,51,.7);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--dim);margin:10px 0 0}
+details[open]{border-color:#34427a}
+footer{padding:40px 0 60px;text-align:center;color:var(--dim);font-size:14px}
+code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radius:7px;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="amb"><i></i><i></i><i></i></div>
+<div class="wrap">
+  <nav>
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#mark"/></svg>
+    <b>DaSync</b>
+    <a class="btn" href="#download">Скачать</a>
+  </nav>
+
+  <header class="hero">
+    <svg class="logo" viewBox="0 0 64 64" aria-label="DaSync"><use href="#mark"/></svg>
+    <h1>Ноутбук<br><span>в твоём кармане</span></h1>
+    <p class="lead">Тачпад, экран, клавиатура, файлы и мониторинг: всё с телефона, по домашней Wi-Fi. Без аккаунтов и облака.</p>
+    <div class="cta">
+      <a class="btn primary" id="heroDl" href="#download">Скачать для Windows</a>
+      <a class="btn" href="#how">Как это работает</a>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="grid">
+      <div class="card"><h3>Тачпад и клавиатура</h3><p>Курсор, клики, прокрутка двумя пальцами, ввод текста (русский тоже), горячие клавиши, звук и плеер.</p></div>
+      <div class="card"><h3>Экран ноутбука</h3><p>Смотри экран и кликай прямо по картинке. Режим Live обновляет его несколько раз в секунду.</p></div>
+      <div class="card"><h3>Состояние и питание</h3><p>Нагрузка, память, диск, батарея, сеть. Заблокировать, усыпить или выключить по таймеру.</p></div>
+      <div class="card"><h3>Файлы и буфер обмена</h3><p>Перекидывай файлы и текст между телефоном и ноутбуком без проводов и мессенджеров.</p></div>
+    </div>
+  </section>
+
+  <section id="download">
+    <h2>Скачать</h2>
+    <p class="sub">Сначала ноутбук, потом телефон. Подключение занимает минуту.</p>
+    <div class="grid">
+      <div class="card" id="cWin"><h3>Windows</h3><p>Установщик 10 и 11. Сам настроит брандмауэр и добавит значок у часов.</p><a class="btn primary" id="lnkWin" href="#">DaSync-Setup.exe</a></div>
+      <div class="card" id="cAnd"><h3>Android</h3><p>APK-файл для установки напрямую. Google Play появится позже.</p><a class="btn" id="lnkAnd" href="#">DaSync.apk</a></div>
+      <div class="card" id="cIos"><h3>iPhone</h3><p>Версия в App Store и TestFlight на подходе. Уже сейчас работает в Safari: наведи камеру на QR и нажми «На экран Домой».</p><a class="btn off" href="#">Скоро в TestFlight</a></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>Как это работает</h2>
+    <p class="sub">Три шага. Вводить пароли не нужно.</p>
+    <div class="grid">
+      <div class="card"><div class="num">1</div><h3>Поставь на ноутбук</h3><p>Запусти установщик. Окно DaSync покажет QR-код.</p></div>
+      <div class="card"><div class="num">2</div><h3>Наведи камеру</h3><p>Открой приложение на телефоне и отсканируй QR. Код одноразовый и живёт две минуты.</p></div>
+      <div class="card"><div class="num">3</div><h3>Подтверди на ноутбуке</h3><p>Нажми «Разрешить» и выбери, что можно этому телефону: мышь, экран, файлы или питание.</p></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Вопросы</h2>
+    <p class="sub">Честные ответы.</p>
+    <details><summary>Windows пишет «Система Windows защитила ваш компьютер»</summary><p>Приложение новое и пока без цифровой подписи, поэтому SmartScreen осторожничает. Нажми «Подробнее», затем «Выполнить в любом случае». Мы работаем над подписью.</p></details>
+    <details><summary>Это безопасно?</summary><p>Подключение работает только из домашней сети. Каждое устройство подтверждается на ноутбуке, получает свои права (питание по умолчанию выключено), а каждый запрос подписан ключом. Пока трафик внутри сети не шифруется, поэтому не включай DaSync в публичных Wi-Fi (кафе, вокзалы): для этого есть пауза в меню значка.</p></details>
+    <details><summary>Нужен ли аккаунт или интернет?</summary><p>Нет. Телефон и ноутбук общаются напрямую по твоей Wi-Fi. Ничего не уходит в облако и никуда не отправляется.</p></details>
+    <details><summary>Телефон не находит ноутбук</summary><p>Проверь, что оба в одной Wi-Fi и что Windows считает эту сеть «Частной» (Параметры → Сеть и Интернет → Wi-Fi → свойства сети). Если у ноутбука сменился адрес, в приложении есть кнопка «Найти в сети».</p></details>
+    <details><summary>А iPhone без App Store?</summary><p>Можно открыть веб-версию в Safari: наведи камеру на QR из окна DaSync и добавь страницу «На экран Домой». Нативное приложение появится в TestFlight, а потом в App Store.</p></details>
+  </section>
+
+  <footer>DaSync · сделано с любовью к ноутбукам · <a href="#top" style="color:var(--cy)">наверх</a></footer>
+</div>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="0" y1="17" x2="0" y2="53"><stop offset="0" stop-color="#6ee7ff"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+  <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="0" y1="11" x2="0" y2="47"><stop offset="0" stop-color="#818cf8"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+  <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171d44"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+  <symbol id="mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="url(#gb)"/><rect class="lb" x="15" y="17" width="10" height="36" rx="5" fill="url(#g1)"/><path class="lw" d="M31 13A16 16 0 0 1 31 45Z" fill="url(#g2)" stroke="url(#g2)" stroke-width="4" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<script>
+// Единственное, что нужно поменять: твой аккаунт и репозиторий на GitHub
+const REPO = "OWNER/REPO";
+const rel = f => `https://github.com/${REPO}/releases/latest/download/${f}`;
+document.getElementById("lnkWin").href = rel("DaSync-Setup.exe");
+document.getElementById("lnkAnd").href = rel("DaSync.apk");
+const ua = navigator.userAgent;
+const win = /Windows/i.test(ua), and = /Android/i.test(ua), ios = /iPhone|iPad/i.test(ua);
+if (win) { document.getElementById("cWin").classList.add("hl"); document.getElementById("heroDl").href = rel("DaSync-Setup.exe"); }
+else if (and) { document.getElementById("cAnd").classList.add("hl"); document.getElementById("heroDl").textContent = "Скачать для Android"; document.getElementById("heroDl").href = rel("DaSync.apk"); }
+else if (ios) { document.getElementById("cIos").classList.add("hl"); document.getElementById("heroDl").textContent = "Как поставить на iPhone"; }
+</script>
+</body>
+</html>
