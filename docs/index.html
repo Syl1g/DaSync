@@ -127,7 +127,7 @@ code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radi
 // Единственное, что нужно поменять: твой аккаунт и репозиторий на GitHub
 const REPO = "Syl1g/DaSync-Setup.exe";
 const rel = f => `https://github.com/${REPO}/releases/latest/download/${f}`;
-document.getElementById("lnkWin").href = rel("DaSync.exe");
+document.getElementById("lnkWin").href = rel("DaSync-Setup.exe");
 document.getElementById("lnkAnd").href = rel("DaSync.apk");
 const ua = navigator.userAgent;
 const win = /Windows/i.test(ua), and = /Android/i.test(ua), ios = /iPhone|iPad/i.test(ua);
