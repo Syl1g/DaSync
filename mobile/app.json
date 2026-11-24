@@ -8,7 +8,7 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.example.dasync",
+      "bundleIdentifier": "io.github.syl1g.dasync",
       "infoPlist": {
         "NSLocalNetworkUsageDescription": "DaSync подключается к вашему ноутбуку в домашней сети.",
         "NSAppTransportSecurity": {
@@ -24,9 +24,14 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.example.dasync",
+      "package": "io.github.syl1g.dasync",
       "permissions": [
         "CAMERA"
+      ],
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
       ]
     },
     "web": {
@@ -37,7 +42,9 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Камера нужна только чтобы отсканировать QR-код на ноутбуке и подключить его."
+          "cameraPermission": "Камера нужна только чтобы отсканировать QR-код на ноутбуке и подключить его.",
+          "recordAudioAndroid": false,
+          "microphonePermission": false
         }
       ],
       [
