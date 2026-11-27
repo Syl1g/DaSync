@@ -1,4 +1,4 @@
-name: Android APK
+name: Android
 
 on:
   push:
@@ -9,9 +9,9 @@ permissions:
   contents: write
 
 jobs:
-  apk:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -29,6 +29,24 @@ jobs:
           if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF_NAME#v}"; else V="0.0.0-dev"; fi
           echo "APP_VERSION=$V" >> "$GITHUB_ENV"
 
+      - name: Ключ подписи (если добавлен в секреты)
+        env:
+          KEYSTORE_B64: ${{ secrets.UPLOAD_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/upload.p12"
+            {
+              echo "DASYNC_UPLOAD_KEYSTORE=$RUNNER_TEMP/upload.p12"
+              echo "DASYNC_UPLOAD_STORE_PASSWORD=$STORE_PASSWORD"
+              echo "DASYNC_UPLOAD_KEY_ALIAS=$KEY_ALIAS"
+            } >> "$GITHUB_ENV"
+            echo "Подпись: свой ключ"
+          else
+            echo "::warning::Секреты ключа не заданы. APK подпишется отладочным ключом, AAB для Google Play не будет создан."
+          fi
+
       - name: Зависимости
         working-directory: mobile
         run: npm ci --no-audit --no-fund
@@ -37,24 +55,47 @@ jobs:
         working-directory: mobile
         run: npx expo prebuild --platform android --no-install
 
-      - name: Сборка APK
+      - name: Сборка
         working-directory: mobile/android
         run: |
           sed -i "s/versionCode [0-9]*/versionCode ${GITHUB_RUN_NUMBER}/" app/build.gradle
           sed -i "s/versionName \".*\"/versionName \"${APP_VERSION}\"/" app/build.gradle
           sed -i 's/^org.gradle.jvmargs=.*/org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g/' gradle.properties
           chmod +x gradlew
-          ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=arm64-v8a
+          TASKS="assembleRelease"
+          if [ -n "$DASYNC_UPLOAD_KEYSTORE" ]; then TASKS="$TASKS bundleRelease"; fi
+          ./gradlew $TASKS --no-daemon -PreactNativeArchitectures=arm64-v8a,armeabi-v7a
 
-      - name: Переименовать
-        run: cp mobile/android/app/build/outputs/apk/release/app-release.apk DaSync.apk
+      - name: Собрать файлы
+        run: |
+          cp mobile/android/app/build/outputs/apk/release/app-release.apk DaSync.apk
+          if [ -n "$DASYNC_UPLOAD_KEYSTORE" ]; then cp mobile/android/app/build/outputs/bundle/release/app-release.aab DaSync.aab; fi
+
+      - name: Проверка, что не подписано отладочным ключом
+        if: env.DASYNC_UPLOAD_KEYSTORE != ''
+        run: |
+          OWNER=$(keytool -printcert -jarfile DaSync.aab | grep -m1 "Owner:" || true)
+          echo "AAB: $OWNER"
+          if echo "$OWNER" | grep -qi "Android Debug"; then echo "::error::AAB подписан отладочным ключом"; exit 1; fi
+          SIGNER=$(ls "$ANDROID_HOME"/build-tools/*/apksigner 2>/dev/null | tail -1 || true)
+          if [ -n "$SIGNER" ]; then
+            CERT=$("$SIGNER" verify --print-certs DaSync.apk | grep -m1 "certificate DN" || true)
+            echo "APK: $CERT"
+            if echo "$CERT" | grep -qi "Android Debug"; then echo "::error::APK подписан отладочным ключом"; exit 1; fi
+          fi
 
       - uses: actions/upload-artifact@v4
         with:
           name: DaSync-apk
           path: DaSync.apk
 
-      - name: Приложить к релизу
+      - uses: actions/upload-artifact@v4
+        if: env.DASYNC_UPLOAD_KEYSTORE != ''
+        with:
+          name: DaSync-aab-for-Google-Play
+          path: DaSync.aab
+
+      - name: Приложить APK к релизу
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
