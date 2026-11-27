@@ -6,6 +6,7 @@ import * as Sharing from 'expo-sharing';
 import { useCallback, useEffect, useState } from 'react';
 import { Alert, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { Btn, Card } from '../components';
+import { demoAddFile } from '../demo';
 import { fsz } from '../format';
 import { useSession } from '../session';
 import { C } from '../theme';
@@ -31,6 +32,7 @@ export default function FilesScreen() {
   const uploadOne = async (p: Pick): Promise<boolean> => {
     const info = await FileSystem.getInfoAsync(p.uri);
     if (!info.exists) { notify(`Не удалось прочитать ${p.name}`); return false; }
+    if (client.isDemo) { demoAddFile(p.name, info.size); return true; }
     // подпись считается до отправки: размер входит в неё, поэтому его нужно знать точно
     const { url, headers } = client.signUpload(p.name, info.size);
     const task = FileSystem.createUploadTask(
@@ -75,6 +77,7 @@ export default function FilesScreen() {
   };
 
   const download = async (name: string) => {
+    if (client.isDemo) { notify('В демо-режиме файлы не скачиваются.'); return; }
     setBusy(`Скачиваю ${name}`);
     setPct(0);
     try {

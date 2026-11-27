@@ -88,7 +88,7 @@ code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radi
     <p class="sub">Сначала ноутбук, потом телефон. Подключение занимает минуту.</p>
     <div class="grid">
       <div class="card" id="cWin"><h3>Windows</h3><p>Установщик 10 и 11. Сам настроит брандмауэр и добавит значок у часов.</p><a class="btn primary" id="lnkWin" href="#">DaSync-Setup.exe</a></div>
-      <div class="card" id="cAnd"><h3>Android</h3><p>APK-файл для установки напрямую. Google Play появится позже.</p><a class="btn" id="lnkAnd" href="#">DaSync.apk</a></div>
+      <div class="card" id="cAnd"><h3>Android</h3><p>APK-файл для установки напрямую. Версия в Google Play готовится.</p><a class="btn" id="lnkAnd" href="#">DaSync.apk</a></div>
       <div class="card" id="cIos"><h3>iPhone</h3><p>Версия в App Store и TestFlight на подходе. Уже сейчас работает в Safari: наведи камеру на QR и нажми «На экран Домой».</p><a class="btn off" href="#">Скоро в TestFlight</a></div>
     </div>
   </section>
@@ -113,7 +113,7 @@ code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radi
     <details><summary>А iPhone без App Store?</summary><p>Можно открыть веб-версию в Safari: наведи камеру на QR из окна DaSync и добавь страницу «На экран Домой». Нативное приложение появится в TestFlight, а потом в App Store.</p></details>
   </section>
 
-  <footer>DaSync · сделано с любовью к ноутбукам · <a href="#top" style="color:var(--cy)">наверх</a></footer>
+  <footer>DaSync · сделано с любовью к ноутбукам · <a href="privacy.html" style="color:var(--cy)">Политика конфиденциальности</a> · <a href="#top" style="color:var(--cy)">наверх</a></footer>
 </div>
 
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -125,7 +125,7 @@ code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radi
 
 <script>
 // Единственное, что нужно поменять: твой аккаунт и репозиторий на GitHub
-const REPO = "Syl1g/DaSync-Setup.exe";
+const REPO = "Syl1g/DaSync";
 const rel = f => `https://github.com/${REPO}/releases/latest/download/${f}`;
 document.getElementById("lnkWin").href = rel("DaSync-Setup.exe");
 document.getElementById("lnkAnd").href = rel("DaSync.apk");

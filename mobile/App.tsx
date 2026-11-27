@@ -86,6 +86,8 @@ function Root() {
     notify('Подключено');
   };
 
+  const onDemo = () => setClient(new Client({ base: 'demo', devid: 'demo', k: '' }, deps));
+
   const search = async () => {
     if (!client) return;
     setSearching(true);
@@ -104,7 +106,7 @@ function Root() {
   const session: Session | null = useMemo(() => (client ? { call, notify, disconnect, host: client.base, client } : null), [call, notify, disconnect, client]);
 
   if (boot) return <View style={{ flex: 1, backgroundColor: C.bg, alignItems: 'center', justifyContent: 'center' }}><ActivityIndicator color={C.accent} /></View>;
-  if (!client || !session) return <PairScreen deps={deps} onPaired={onPaired} />;
+  if (!client || !session) return <PairScreen deps={deps} onPaired={onPaired} onDemo={onDemo} />;
 
   return (
     <SessionCtx.Provider value={session}>
@@ -113,7 +115,7 @@ function Root() {
           <Logo size={30} />
           <Text style={s.brand}>DaSync</Text>
           <View style={[s.dot, { backgroundColor: status === 'ok' ? C.ok : status === 'paused' ? C.warn : C.bad }]} />
-          <Text style={s.state}>{status === 'ok' ? 'На связи' : status === 'paused' ? 'Пауза на ноуте' : 'Нет связи'}</Text>
+          <Text style={s.state}>{client.isDemo ? 'Демо-режим' : status === 'ok' ? 'На связи' : status === 'paused' ? 'Пауза на ноуте' : 'Нет связи'}</Text>
         </View>
         {status === 'offline' && (
           <View style={s.banner}>

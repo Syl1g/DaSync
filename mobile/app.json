@@ -69,7 +69,8 @@
         {
           "photosPermission": "DaSync берёт фото и видео из галереи, чтобы отправить их на ноутбук."
         }
-      ]
+      ],
+      "./plugins/with-release-signing"
     ],
     "scheme": "dasync",
     "backgroundColor": "#0b1020"

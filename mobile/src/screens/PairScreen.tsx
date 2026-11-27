@@ -7,7 +7,7 @@ import { Btn, Logo } from '../components';
 import { ApiError, Creds, Deps, PairPhase, pair, parsePairLink } from '../protocol';
 import { C } from '../theme';
 
-export default function PairScreen({ deps, onPaired }: { deps: Deps; onPaired: (c: Creds) => void }) {
+export default function PairScreen({ deps, onPaired, onDemo }: { deps: Deps; onPaired: (c: Creds) => void; onDemo: () => void }) {
   const insets = useSafeAreaInsets();
   const [perm, askPerm] = useCameraPermissions();
   const [phase, setPhase] = useState<'scan' | PairPhase | 'error'>('scan');
@@ -86,6 +86,8 @@ export default function PairScreen({ deps, onPaired }: { deps: Deps; onPaired: (
                 style={s.input}
               />
               <Btn title="Подключить" onPress={() => run(link, true)} style={{ marginTop: 10 }} />
+              <Btn title="Посмотреть в демо-режиме" onPress={onDemo} style={{ marginTop: 10, borderColor: 'transparent', backgroundColor: 'transparent' }} />
+              <Text style={[s.hint, { marginTop: 2 }]}>Демо покажет все экраны без ноутбука.</Text>
             </View>
           )}
         </ScrollView>

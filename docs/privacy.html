@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DaSync: политика конфиденциальности</title>
+<meta name="color-scheme" content="dark light">
+<style>
+:root{--bg:#0b1020;--ink:#e8ecff;--dim:#9aa3c7;--line:#232b4d;--acc:#6ee7ff}
+@media (prefers-color-scheme:light){:root{--bg:#f6f7fb;--ink:#141a33;--dim:#4b5578;--line:#d8dcec;--acc:#2563eb}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:36px 22px 80px}
+h1{font-size:30px;margin:0 0 4px}h2{font-size:20px;margin:34px 0 8px}
+p,li{color:var(--ink)}.dim{color:var(--dim)}
+ul{padding-left:22px}a{color:var(--acc)}
+hr{border:0;border-top:1px solid var(--line);margin:44px 0}
+nav a{margin-right:16px}
+</style>
+</head>
+<body>
+<main>
+<nav><a href="index.html">← DaSync</a><a href="#ru">Русский</a><a href="#en">English</a></nav>
+
+<section id="ru">
+<h1>Политика конфиденциальности DaSync</h1>
+<p class="dim">Действует с 27 ноября 2026 г.</p>
+
+<p>DaSync состоит из двух частей: приложения для телефона и программы DaSync для Windows на твоём ноутбуке. Они общаются напрямую по твоей домашней сети. <b>У разработчика нет серверов, на которые приходили бы твои данные, и нет аккаунтов.</b></p>
+
+<h2>Какие данные использует приложение</h2>
+<ul>
+<li><b>Камера.</b> Нужна только чтобы отсканировать QR-код на ноутбуке. Изображения не сохраняются и никуда не отправляются.</li>
+<li><b>Фото, видео и файлы.</b> Только те, что ты сам выбрал для отправки. Они передаются на твой ноутбук по домашней сети и никуда больше.</li>
+<li><b>Содержимое экрана, текст, клавиши, буфер обмена, состояние ноутбука.</b> Передаются между твоим телефоном и твоим ноутбуком по домашней сети. Разработчику они не передаются.</li>
+<li><b>Ключ устройства.</b> После подключения телефон хранит случайный идентификатор и секретный ключ в защищённом хранилище телефона (Keychain на iPhone, Keystore на Android). Ключ нужен, чтобы подписывать запросы к ноутбуку.</li>
+</ul>
+
+<h2>Чего в приложении нет</h2>
+<p>Нет аккаунтов и регистрации, нет рекламы, нет аналитики и отчётов о сбоях, нет сторонних сервисов, которые получали бы твои данные. Данные не продаются и не передаются третьим лицам.</p>
+
+<h2>Что хранится на ноутбуке</h2>
+<p>Программа DaSync для Windows хранит локально, в профиле пользователя: список подключённых устройств с их ключами и правами, журнал событий, историю нагрузки (до 8 дней), заметки и принятые файлы. Всё это остаётся на ноутбуке и никуда не отправляется.</p>
+
+<h2>Безопасность</h2>
+<p>Подключение требует одноразового QR-кода и подтверждения на ноутбуке. Каждый запрос подписан ключом устройства, права устройств настраиваются. При этом <b>сейчас канал связи внутри домашней сети не шифруется</b>: подпись защищает от подделки команд, но не от подслушивания в той же сети. Поэтому не используй DaSync в публичных сетях Wi-Fi.</p>
+
+<h2>Как удалить данные</h2>
+<ul>
+<li>На телефоне: кнопка «Отключить это устройство» на вкладке «Питание» или удаление приложения удаляет ключ.</li>
+<li>На ноутбуке: в окне DaSync на странице «Устройства» кнопка «Забыть» или «Забыть все устройства» в настройках. Папку с принятыми файлами и данные программы можно удалить вручную.</li>
+</ul>
+
+<h2>Дети</h2>
+<p>DaSync не предназначен для детей младше 13 лет.</p>
+
+<h2>Изменения и контакты</h2>
+<p>Если политика изменится, новая версия появится на этой странице. Вопросы: <a href="mailto:aparytskiy@icloud.com">aparytskiy@icloud.com</a>.</p>
+</section>
+
+<hr>
+
+<section id="en" lang="en">
+<h1>DaSync Privacy Policy</h1>
+<p class="dim">Effective November 27, 2026.</p>
+
+<p>DaSync has two parts: a phone app and the DaSync program for Windows on your laptop. They talk to each other directly over your home network. <b>The developer runs no servers that receive your data, and there are no accounts.</b></p>
+
+<h2>Data the app uses</h2>
+<ul>
+<li><b>Camera.</b> Used only to scan the QR code shown on your laptop. Images are not saved or sent anywhere.</li>
+<li><b>Photos, videos and files.</b> Only the ones you choose to send. They go to your laptop over your home network and nowhere else.</li>
+<li><b>Screen picture, typed text, keys, clipboard and laptop status.</b> Exchanged between your phone and your laptop over your home network. They are never sent to the developer.</li>
+<li><b>Device key.</b> After pairing, the phone stores a random device ID and a secret key in its secure storage (Keychain on iPhone, Keystore on Android) to sign requests to your laptop.</li>
+</ul>
+
+<h2>What the app does not have</h2>
+<p>No accounts or sign-up, no ads, no analytics or crash reporting, and no third-party services that receive your data. Data is not sold or shared with third parties.</p>
+
+<h2>What is stored on the laptop</h2>
+<p>The Windows program stores locally, in your user profile: the list of paired devices with their keys and permissions, an event log, load history (up to 8 days), notes and received files. All of it stays on your laptop.</p>
+
+<h2>Security</h2>
+<p>Pairing requires a single-use QR code and approval on the laptop. Every request is signed with the device key and permissions are configurable. However, <b>traffic inside your home network is currently not encrypted</b>: signatures protect against forged commands but not against eavesdropping on the same network. Do not use DaSync on public Wi-Fi.</p>
+
+<h2>Deleting data</h2>
+<ul>
+<li>On the phone: "Отключить это устройство" (disconnect this device) on the Power tab, or uninstalling the app, removes the key.</li>
+<li>On the laptop: "Забыть" (forget) on the Devices page of the DaSync window, or "forget all devices" in settings. Received files and program data can be deleted manually.</li>
+</ul>
+
+<h2>Children</h2>
+<p>DaSync is not intended for children under 13.</p>
+
+<h2>Changes and contact</h2>
+<p>If this policy changes, the new version will be posted on this page. Questions: <a href="mailto:aparytskiy@icloud.com">aparytskiy@icloud.com</a>.</p>
+</section>
+</main>
+</body>
+</html>

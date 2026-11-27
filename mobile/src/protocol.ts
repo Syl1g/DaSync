@@ -3,6 +3,7 @@
 import { hmac } from '@noble/hashes/hmac.js';
 import { sha256 } from '@noble/hashes/sha2.js';
 import { bytesToHex, hexToBytes, utf8ToBytes } from '@noble/hashes/utils.js';
+import { demoCall } from './demo';
 
 export type Creds = { base: string; devid: string; k: string };
 export type Deps = {
@@ -113,6 +114,11 @@ export class Client {
     return this.creds.base;
   }
 
+  /** Демо-режим: ноутбука нет, ответы изображает приложение. */
+  get isDemo(): boolean {
+    return this.creds.base === 'demo';
+  }
+
   setBase(base: string) {
     this.creds = { ...this.creds, base };
   }
@@ -134,6 +140,10 @@ export class Client {
   }
 
   async call<T = any>(body: Record<string, unknown>): Promise<T> {
+    if (this.isDemo) {
+      await sleep(40);
+      return demoCall(body) as T;
+    }
     const str = JSON.stringify(body);
     const bh = sha256Hex(str);
     for (let n = 0; n < 2; n++) {
