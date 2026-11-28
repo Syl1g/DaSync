@@ -17,6 +17,10 @@
 </p>
 
 <p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue" alt="Лицензия GPL-3.0"></a>
+</p>
+
+<p align="center">
   <img src="store/graphics/feature-graphic-1024x500.png" alt="DaSync: ноутбук в твоём кармане" width="760">
 </p>
 
@@ -87,6 +91,10 @@
 
 Ранняя версия. Windows и Android работают, iPhone пока через Safari. Скоро: Google Play, TestFlight, заметки и история нагрузки в приложении, шифрование трафика.
 Нашёл ошибку или есть идея? [Напиши в Issues](https://github.com/Syl1g/DaSync/issues).
+
+## Лицензия
+
+DaSync свободная программа: исходный код открыт и распространяется по лицензии [GNU GPL v3 или новее](LICENSE). Можно пользоваться, изучать, менять и делиться, но изменённые версии нужно выпускать на тех же условиях и с исходным кодом. Название «DaSync» и логотип в лицензию не входят. Сторонние компоненты: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ---
 

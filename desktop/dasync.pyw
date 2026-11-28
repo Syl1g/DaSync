@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 Syl1g. Распространяется на условиях GNU GPL v3 или новее, см. файл LICENSE.
 """
 DaSync: ноутбук в кармане. Живёт в трее, управляется с телефона.
 

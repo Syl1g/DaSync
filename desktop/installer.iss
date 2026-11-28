@@ -34,6 +34,8 @@ Name: "desktopicon"; Description: "Ярлык на рабочем столе"; G
 
 [Files]
 Source: "dist\DaSync\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\LICENSE"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
+Source: "..\THIRD_PARTY_NOTICES.md"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\DaSync"; Filename: "{app}\DaSync.exe"
