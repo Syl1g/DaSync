@@ -6,6 +6,17 @@
 <title>DaSync: ноутбук в кармане</title>
 <meta name="description" content="Управляй ноутбуком с телефона: тачпад, экран, файлы и мониторинг по домашней Wi-Fi. Без аккаунтов и облака.">
 <meta name="theme-color" content="#0b1020">
+<link rel="canonical" href="https://syl1g.github.io/DaSync/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DaSync: ноутбук в твоём кармане">
+<meta property="og:description" content="Тачпад, экран, файлы и мониторинг ноутбука с телефона по домашней Wi-Fi. Без аккаунтов и облака.">
+<meta property="og:url" content="https://syl1g.github.io/DaSync/">
+<meta property="og:image" content="https://syl1g.github.io/DaSync/assets/og.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DaSync: ноутбук в твоём кармане">
+<meta name="twitter:image" content="https://syl1g.github.io/DaSync/assets/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"DaSync","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows, Android","description":"Управляй ноутбуком с телефона по домашней Wi-Fi: тачпад, экран, клавиатура, файлы и мониторинг.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://syl1g.github.io/DaSync/","image":"https://syl1g.github.io/DaSync/assets/og.png","downloadUrl":"https://github.com/Syl1g/DaSync/releases/latest"}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1020'/%3E%3Crect x='15' y='17' width='10' height='36' rx='5' fill='%236ee7ff'/%3E%3Cpath d='M31 13A16 16 0 0 1 31 45Z' fill='%23a78bfa' stroke='%23a78bfa' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 :root{--bg:#0b1020;--card:#141a33;--line:#232b4d;--ink:#e8ecff;--dim:#9aa3c7;--cy:#6ee7ff;--vi:#a78bfa;color-scheme:dark}
@@ -51,6 +62,12 @@ summary{cursor:pointer;font-weight:600}
 details p{color:var(--dim);margin:10px 0 0}
 details[open]{border-color:#34427a}
 footer{padding:40px 0 60px;text-align:center;color:var(--dim);font-size:14px}
+/* галерея скриншотов */
+.shots{display:flex;gap:18px;overflow-x:auto;padding:8px 4px 22px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.shots figure{margin:0;flex:none;scroll-snap-align:center;text-align:center}
+.shots img{height:520px;width:auto;border-radius:28px;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(110,231,255,.28);display:block}
+.shots figcaption{color:var(--dim);font-size:14px;margin-top:10px}
+@media (max-width:640px){.shots img{height:420px}}
 code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radius:7px;font-size:13px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -80,6 +97,18 @@ code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radi
       <div class="card"><h3>Экран ноутбука</h3><p>Смотри экран и кликай прямо по картинке. Режим Live обновляет его несколько раз в секунду.</p></div>
       <div class="card"><h3>Состояние и питание</h3><p>Нагрузка, память, диск, батарея, сеть. Заблокировать, усыпить или выключить по таймеру.</p></div>
       <div class="card"><h3>Файлы и буфер обмена</h3><p>Перекидывай файлы и текст между телефоном и ноутбуком без проводов и мессенджеров.</p></div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <h2>Как выглядит</h2>
+    <p class="sub">Реальные экраны приложения.</p>
+    <div class="shots">
+      <figure><img src="assets/shot-1.png" alt="Тачпад" loading="lazy"><figcaption>Тачпад</figcaption></figure>
+      <figure><img src="assets/shot-2.png" alt="Экран ноутбука" loading="lazy"><figcaption>Экран ноутбука</figcaption></figure>
+      <figure><img src="assets/shot-3.png" alt="Ввод и горячие клавиши" loading="lazy"><figcaption>Ввод и клавиши</figcaption></figure>
+      <figure><img src="assets/shot-4.png" alt="Состояние ноутбука" loading="lazy"><figcaption>Состояние</figcaption></figure>
+      <figure><img src="assets/shot-5.png" alt="Питание и таймер" loading="lazy"><figcaption>Питание и таймер</figcaption></figure>
     </div>
   </section>
 
@@ -113,7 +142,7 @@ code{background:#0f1530;border:1px solid var(--line);padding:2px 7px;border-radi
     <details><summary>А iPhone без App Store?</summary><p>Можно открыть веб-версию в Safari: наведи камеру на QR из окна DaSync и добавь страницу «На экран Домой». Нативное приложение появится в TestFlight, а потом в App Store.</p></details>
   </section>
 
-  <footer>DaSync · сделано с любовью к ноутбукам · <a href="privacy.html" style="color:var(--cy)">Политика конфиденциальности</a> · <a href="#top" style="color:var(--cy)">наверх</a></footer>
+  <footer>DaSync · сделано с любовью к ноутбукам · <a href="privacy.html" style="color:var(--cy)">Политика конфиденциальности</a> · <a href="https://github.com/Syl1g/DaSync" style="color:var(--cy)">GitHub</a> · <a href="#top" style="color:var(--cy)">наверх</a></footer>
 </div>
 
 <svg width="0" height="0" style="position:absolute"><defs>
